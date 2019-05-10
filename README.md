@@ -30,6 +30,7 @@ Coupled with Rancher it will let you build a distributable, highly available Bui
 
 Example Docker Compose - Full Stack Jenkins Master + Build Node
 
+```
 version: '2'
 services:
   Jenkins-Slave-Java:
@@ -54,6 +55,7 @@ services:
     volumes:
     - /opt/volumes/jenkins-master:/var/jenkins_home
     tty: true
+```
 
 **Usage - Post-Deployment Steps**
 
