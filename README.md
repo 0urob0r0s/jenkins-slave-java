@@ -92,7 +92,9 @@ The Swarm Plugin is required in order to allow the automatic provisioning of the
 	- Manage Jenkins > Manage Users >>
 	- Create User
   
-3 - Install Plugins:
+4 - Configure MSBuild:
 
-	- Manage Jenkins > Manage Plugins >>
-	- Available > Self-Organizing Swarm Plug-in Modules [+]
+	- Manage Jenkins > Global Tool Configuration >>
+	- MSBuild > Add MsBuild
+	- Name → Mono
+	- Path to MSBuild → /usr/bin/msbuild
