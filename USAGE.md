@@ -1,5 +1,6 @@
+# Basic Usage Instructions
 
-**Usage - Deployment**
+**Deployment**
 
 *Environment variables:*
 
@@ -38,7 +39,7 @@ services:
     tty: true
 ```
 
-**Usage - Post-Deployment Steps**
+**Post-Deployment Steps**
 
 The Swarm Plugin is required in order to allow the automatic provisioning of the Build nodes.
 *Perform the following steps on the Jenkins Master:*
