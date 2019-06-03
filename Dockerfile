@@ -18,13 +18,16 @@ RUN groupadd -g ${gid} ${group} \
 
 WORKDIR "${JENKINS_AGENT_HOME}"
 
-# Install Swarm Agent and Misc tools
+# Install Swarm Agent, Docker tools, Rancher CLI and Misc tools
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y curl wget openssh-client openssl software-properties-common apt-transport-https ca-certificates && \
+    apt-get install --no-install-recommends -y curl wget openssh-client openssl apt-transport-https ca-certificates software-properties-common && \
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && \
+    apt-get update && \
+    apt-get install --no-install-recommends -y docker-ce-cli docker-compose && \
     rm -rf /var/lib/apt/lists/* && \
+    curl -SL https://releases.rancher.com/cli/v0.6.10/rancher-linux-amd64-v0.6.10.tar.gz | tar --strip=2 -xzC /usr/bin/ && \
     wget --no-check-certificate -q https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/${SWARM_CLIENT_VERSION}/swarm-client-${SWARM_CLIENT_VERSION}.jar -P ${JENKINS_AGENT_HOME} && \
-    curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose && \
-    chmod +x /usr/local/bin/docker-compose && \
     curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
 
 # Install JDK 8 (latest edition)
